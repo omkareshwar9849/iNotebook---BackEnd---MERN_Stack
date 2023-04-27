@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoURL = "mongodb://localhost:27017"
+const mongoURL = "mongodb://0.0.0.0:27017"
 mongoose.set("strictQuery", false);
 
 async function connecToMongo() {
