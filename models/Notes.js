@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const NotesSchema = schema({
+
+const NotesSchema = Schema({
     title:{
         type: String,
         required: true
@@ -16,7 +18,7 @@ const NotesSchema = schema({
     date:{
         type: Date,
         default: Date.now
-    }
+    },
 });
 
 module.exports = mongoose.model("notes", NotesSchema);

@@ -1,25 +1,16 @@
-const connecToMongo = require('./db.js');
+const connectToMongo = require('./db');
 const express = require('express')
-connecToMongo().catch((err) => console.log(err));
 
+connectToMongo();
 const app = express()
-const port = 3000
+const port = 5000
 
-//Avaliable Routes
-app.use('/api/auth' , require('./routes/auth'))
-app.use('/api/notes',require('./routes/notes'))
+app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('Hello Omkar!')
-})
+// Available Routes
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/notes', require('./routes/notes'))
 
-app.get('/api/login', (req, res) => {
-  res.send('Hello Omkar login!')
-})
-
-app.get('/signup', (req, res) => {
-  res.send('Hello Omkar signup!')
-})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
