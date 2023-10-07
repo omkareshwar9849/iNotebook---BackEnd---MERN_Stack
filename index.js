@@ -12,6 +12,7 @@ app.use(express.json())
 // Available Routes
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/note', require('./routes/note'))
+app.use('/api/email', require('./routes/email'))
 
 
 app.listen(port, () => {
