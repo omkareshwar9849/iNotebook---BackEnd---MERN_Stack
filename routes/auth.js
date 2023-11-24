@@ -114,4 +114,43 @@ router.post('/getuser', fetchuser , async (req,res)=>{
   }
 })
 
+// Route 4: Changing Password for a User using: POST "/api/auth/changepassword"
+router.post('/changepassword', [
+  body('email', 'Enter a valid email').isEmail(),
+  body('newPassword', 'New password must be at least 5 characters').isLength({ min: 5 }),
+], async (req, res) => {
+  let success = false;
+  // If there are errors, return Bad request and the errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success, errors: errors.array() });
+  }
+
+  const { email, newPassword } = req.body;
+  
+  try {
+    // Check whether the user with this email exists
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      success = false;
+      return res.status(400).json({ success, error: "User not found" });
+    }
+
+    // Update the password with the new one
+    const salt = await bcrypt.genSalt(10);
+    const newSecPass = await bcrypt.hash(newPassword, salt);
+    user.password = newSecPass;
+    await user.save();
+
+    success = true;
+    res.json({ success, message: "Password changed successfully" });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal server Error occurred");
+  }
+})
+
+
 module.exports = router

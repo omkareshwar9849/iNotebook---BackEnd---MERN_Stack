@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/otp", (req, res) => {
-  res.send(generatedOtp);
+  res.status(200).json({"OTP": generatedOtp});
 });
 
 router.get("/otp/:num", (req, res) => {
@@ -29,7 +29,7 @@ router.get("/otp/:num", (req, res) => {
 });
 
 router.post("/sendotp", async (req, res) => {
-    let html2=`
+  let html2 = `
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -478,23 +478,29 @@ a[x-apple-data-detectors='true'] {
 `
   const transporter = nodemailer.createTransport({
     host: "smtp.mailgun.org",
-    port: 587,
+    port: 465,
     auth: {
-      user: "postmaster@sandbox9cea843493da41cca60f8c67bc4460f8.mailgun.org",
-      pass: "5d87e6e4acf5b0a46d42eed18ec8fd38-77316142-9ae6e7f6",
+      user: "postmaster@sandbox22d715c93b0045a98f528202d224a409.mailgun.org",
+      pass: "af31fb712776f4987333892aac6e6675-5d2b1caa-39571667",
     },
   });
 
-  const info = await transporter.sendMail({
-    from: '"iNotebook" <iNotebook@om.in>', // sender address
-    to: req.body.email, // list of receivers
-    subject: "iNotebook OTP 🤩😇", // Subject line
-    text: "Hello world?", // plain text body
-    html: html2, // html body
-  });
+  try {
+    const info = await transporter.sendMail({
+      from: '"iNotebook" <iNotebook@om.in>', // sender address
+      to: req.body.email, // list of receivers
+      subject: "iNotebook OTP 🤩😇", // Subject line
+      text: "Hello world?", // plain text body
+      html: html2, // html body
+    });
 
-  console.log("Message sent: %s", info.messageId);
-  res.json(info);
+    console.log("Message sent: %s", info.messageId);
+    res.json(info);
+
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 module.exports = router
