@@ -28,8 +28,7 @@ router.get("/otp/:num", (req, res) => {
   }
 });
 
-router.post("/sendotp", async (req, res) => {
-  let html2 = `
+let html2 = `
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -476,23 +475,54 @@ a[x-apple-data-detectors='true'] {
 
 </html>
 `
+// router.post("/sendotp", async (req, res) => {
+//   const transporter = nodemailer.createTransport({
+//     host: "smtp.mailgun.org",
+//     port: 465,
+//     auth: {
+//       // user: "postmaster@sandbox22d715c93b0045a98f528202d224a409.mailgun.org",
+//       user: "postmaster@sandboxc5666842901c4d45a76c65a29c35e809.mailgun.org",
+//       pass: "770a7828ab8a4fc872f83e718f8d5ce6-5d2b1caa-31f8f214",
+//       // pass: "af31fb712776f4987333892aac6e6675-5d2b1caa-39571667",
+//     },
+//   });
+
+//   try {
+//     const info = await transporter.sendMail({
+//       from: '"iNotebook" <iNotebook@om.in>', // sender address
+//       to: req.body.email, // list of receivers
+//       subject: "iNotebook OTP 🤩😇", // Subject line
+//       text: "Hello world?", // plain text body
+//       html: html2, // html body
+//     });
+
+//     console.log("Message sent: %s", info.messageId);
+//     res.json(info);
+
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
+
+router.post("/sendotp", async (req, res) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp.mailgun.org",
+    host: "smtp.gmail.com",
     port: 465,
     auth: {
-      // user: "postmaster@sandbox22d715c93b0045a98f528202d224a409.mailgun.org",
-      user: "postmaster@sandboxc5666842901c4d45a76c65a29c35e809.mailgun.org",
-      pass: "770a7828ab8a4fc872f83e718f8d5ce6-5d2b1caa-31f8f214",
-      // pass: "af31fb712776f4987333892aac6e6675-5d2b1caa-39571667",
+    //   user: "postmaster@sandboxc5666842901c4d45a76c65a29c35e809.mailgun.org",
+    //   pass: "770a7828ab8a4fc872f83e718f8d5ce6-5d2b1caa-31f8f214",
+    user:"thugmeems@gmail.com",
+    pass:"tnlzapkwdxcthufi"
     },
   });
 
   try {
     const info = await transporter.sendMail({
-      from: '"iNotebook" <iNotebook@om.in>', // sender address
+      from: '"iNotebook"', // sender address
       to: req.body.email, // list of receivers
       subject: "iNotebook OTP 🤩😇", // Subject line
-      text: "Hello world?", // plain text body
+      text: "Otp is "+generatedOtp, // plain text body
       html: html2, // html body
     });
 
