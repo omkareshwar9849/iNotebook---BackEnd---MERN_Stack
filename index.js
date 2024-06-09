@@ -34,6 +34,6 @@ app.get('/', (req, res) => {
 
 
 app.listen(port,hostname, () => {
-  console.log(`Example app listening at http://${hostname}:${port}`);
-  // console.log(`Server running at http://0.0.0.0:${port}/`);
+  // console.log(`Example app listening at http://${hostname}:${port}`);
+  console.log(`Server running at http://0.0.0.0:${port}/`);
 })
