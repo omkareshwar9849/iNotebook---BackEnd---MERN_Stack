@@ -1,7 +1,7 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const router = express.Router();
-
+require('dotenv').config()
 
 //generating an otp
 var generatedOtp = (Math.floor(Math.random() * 10000) + 10000)
@@ -513,7 +513,7 @@ router.post("/sendotp", async (req, res) => {
     //   user: "postmaster@sandboxc5666842901c4d45a76c65a29c35e809.mailgun.org",
     //   pass: "770a7828ab8a4fc872f83e718f8d5ce6-5d2b1caa-31f8f214",
     user:"thugmeems@gmail.com",
-    pass:"tnlzapkwdxcthufi"
+    pass: "tnlzapkwdxcthufi"
     },
   });
 
@@ -521,12 +521,13 @@ router.post("/sendotp", async (req, res) => {
     const info = await transporter.sendMail({
       from: '"iNotebook"', // sender address
       to: req.body.email, // list of receivers
-      subject: "iNotebook OTP 🤩😇", // Subject line
+      subject: `iNotebook OTP 🤩😇 - ${generatedOtp}`, // Subject line
       text: "Otp is "+generatedOtp, // plain text body
       html: html2, // html body
     });
 
     console.log("Message sent: %s", info.messageId);
+    generatedOtp = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
     res.json(info);
 
   } catch (error) {

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 // const mongoURL = "mongodb://0.0.0.0:27017/inotebook"
-const mongoURL = "mongodb+srv://omkar:omkar@cluster0.2eqx9us.mongodb.net/inotebook"
+const mongoURL = process.env.MONGO
 mongoose.set("strictQuery", false);
 
 async function connecToMongo() {
