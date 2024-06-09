@@ -527,7 +527,6 @@ router.post("/sendotp", async (req, res) => {
     });
 
     console.log("Message sent: %s", info.messageId);
-    generatedOtp = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
     res.json(info);
 
   } catch (error) {
