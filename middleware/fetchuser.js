@@ -7,7 +7,7 @@ const fetchuser = (req,res,next)=>{
     
     const token = req.header('auth-token');
     if(!token){
-        res.stauts(401).send({error : "please authenticate using a valid token"})
+        res.status(401).send({error : "please authenticate using a valid token"})
     }
 
     try {
@@ -15,7 +15,7 @@ const fetchuser = (req,res,next)=>{
         req.user = data.user;
         next();
     } catch (error) {
-        res.stauts(401).send({error : "please authenticare using a valid token"})
+        res.status(401).send({error : "please authenticare using a valid token"})
     }
 }
 

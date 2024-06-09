@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/otp", (req, res) => {
-  res.status(200).json({"OTP": generatedOtp});
+  res.status(200).json({"OTP": generatedOtp})
 });
 
 router.get("/otp/:num", (req, res) => {
@@ -480,8 +480,10 @@ a[x-apple-data-detectors='true'] {
     host: "smtp.mailgun.org",
     port: 465,
     auth: {
-      user: "postmaster@sandbox22d715c93b0045a98f528202d224a409.mailgun.org",
-      pass: "af31fb712776f4987333892aac6e6675-5d2b1caa-39571667",
+      // user: "postmaster@sandbox22d715c93b0045a98f528202d224a409.mailgun.org",
+      user: "postmaster@sandboxc5666842901c4d45a76c65a29c35e809.mailgun.org",
+      pass: "770a7828ab8a4fc872f83e718f8d5ce6-5d2b1caa-31f8f214",
+      // pass: "af31fb712776f4987333892aac6e6675-5d2b1caa-39571667",
     },
   });
 
